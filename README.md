@@ -31,7 +31,7 @@ Pipe(10).then(double_fn).then(square_fn).out
 ## Functional programming operations
 easy-pipe supports Functional programming style operations such as `map`, `filter` and `reduce`
 
-#### map
+#### Map
 ```
 
 numbers = [1, 2, 3, 4, 5]
@@ -39,7 +39,7 @@ Pipe.x(numbers).map(square_fn).then(list).out
 # output: [1, 4, 9, 16, 25]
 ```
 
-#### filter
+#### Filter
 ```
 numbers = [1, 2, 3, 4, 5]
 (Pipe.x(numbers)
@@ -52,7 +52,7 @@ numbers = [1, 2, 3, 4, 5]
 
 ```
 
-#### reduce
+#### Reduce
 ```
 numbers = [1, 2, 3, 4, 5]
 (Pipe.x(numbers)
@@ -62,3 +62,33 @@ numbers = [1, 2, 3, 4, 5]
 # output: 15 (1+2+3+4+5)
 ```
 
+### Match
+```
+# Pipe match with values
+number = 100
+(Pipe
+ .x(number % 2)
+ .match(
+    {0: "The number is even",
+     1: "The number is odd"
+    })
+ .out
+)
+# Output: 'The number is even'
+```
+
+Match with functions 
+```
+number = 101
+(Pipe
+ .x(number)
+ .then(lambda x: x%2)
+ .match(
+    {0: lambda x: f"{x} is even",
+     1: lambda x: f"{x} is odd"
+    })
+ .out
+)
+
+# output: '1 is odd'
+```
